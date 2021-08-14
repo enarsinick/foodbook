@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Recipe, {
         as: "owner",
         foreignKey: {
-          fieldName: "userId",
+          fieldName: "recipeId",
           allowNull: false,
           validate: {
             notNull: {
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   User.init({
     userId: {
-      type: DataTypes.INTERGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
