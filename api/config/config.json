@@ -1,14 +1,14 @@
 {
   "development": {
   "dialect": "sqlite",
-  "storage": "./database.sqlite3"
+  "storage": "foodbook.db"
 },
   "test": {
   "dialect": "sqlite",
-  "storage": ":memory"
+  "storage": "foodbook.db"
 },
   "production": {
   "dialect": "sqlite",
-  "storage": "./database.sqlite3"
+  "storage": "foodbook.db"
 }
 }
