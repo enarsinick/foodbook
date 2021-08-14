@@ -8,7 +8,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Recipe.belongsTo(models.User, {
+        as: "owner",
+        foreignKey: {
+          fieldName: "userId",
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: "A course owner ID is required",
+            },
+            notEmpty: {
+              msg: "Please provide a course owner ID"
+            }
+          }
+        }
+      })
     }
   };
   Recipe.init({
