@@ -103,18 +103,31 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    displayImage: {
-      type: DataTypes.STRING, 
+    tileImage: {
+      type: DataTypes.BLOB('long'), 
       allowNull: false,
       validate: {
         notNull: {
-          msg: "Please add a image link for the recipe"
+          msg: "Please add a tile image for the recipe"
         },
         notEmpty: {
-          msg: "Please add a valid image link for the recipe"
+          msg: "Please add a valid tile image for the recipe"
+        }
+      }
+    },
+    coverImage: {
+      type: DataTypes.BLOB('long'),
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Please add a cover image for the recipe"
+        },
+        notEmpty: {
+          msg: "Please add a valid cover image for the recipe"
         }
       }
     }
+
   }, {
     sequelize,
     modelName: 'Recipe',
