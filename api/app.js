@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // Routes
-const indexRouter = require('./routes/index');
+const recipeRouter = require('./routes/recipes');
 const usersRouter = require('./routes/users');
 
 // create express app
@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use('/api', indexRouter);
+// API Routes
+app.use('/api', recipeRouter);
 app.use('/api', usersRouter);
 
 // setup a friendly greeting for the root route
@@ -38,7 +38,6 @@ app.get('/', (req, res) => {
     message: 'Welcome to the Foodbook API!',
   });
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
