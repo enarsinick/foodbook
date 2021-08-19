@@ -14,6 +14,9 @@ const cors = require('cors');
 const recipeRouter = require('./routes/recipes');
 const usersRouter = require('./routes/users');
 
+// variable to enable global error logging
+const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'true';
+
 // create express app
 const app = express();
 
@@ -21,6 +24,7 @@ const app = express();
 app.use(cors());
 
 app.use(logger('dev'));
+app.set('view engine', 'jade');
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -55,16 +59,18 @@ app.use(function(req, res, next) {
   }
 })();
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// setup a global error handler
+app.use((err, req, res, next) => {
+  if (enableGlobalErrorLogging) {
+    console.error(`Global error handler: ${JSON.stringify(err.stack)}`);
+  }
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  res.status(err.status || 500).json({
+    message: err.message,
+    error: {err},
+  });
 });
+
 
 // set our port
 app.set('port', process.env.PORT || 5000);

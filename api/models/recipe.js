@@ -15,10 +15,10 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
           validate: {
             notNull: {
-              msg: "A course owner ID is required",
+              msg: "A recipe owner ID is required",
             },
             notEmpty: {
-              msg: "Please provide a course owner ID"
+              msg: "Please provide a recipe owner ID"
             }
           }
         }
